@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+Party Menu Selection App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app allows users to select dishes for a party menu by browsing meal categories, filtering dishes, and viewing details. Built with React functional components, React hooks, and react-router-dom for navigation.
 
-## Available Scripts
 
-In the project directory, you can run:
+1. Menu Categories
+Display 4 meal type tabs: Starter, Main Course, Dessert, Sides.
 
-### `npm start`
+Clicking a tab shows dishes relevant to that category.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Dish List
+Each dish card shows:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Dish Name
 
-### `npm test`
+Short Description
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Image
 
-### `npm run build`
+Button to Add/Remove the dish
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Link/button labeled "Ingredient" to view ingredients
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Selected dishes are visually marked.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Selected count updates based on added dishes.
 
-### `npm run eject`
+3. Search Functionality
+Search bar at the top to filter dishes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Filters dishes based on dish name (case-insensitive).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Search scope limited to the selected meal category.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Veg / Non-Veg Filter
+Two toggle filters: Veg and Non-Veg.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Filters dish list immediately based on selected type.
 
-## Learn More
+5. Dish Selection Summary
+Show count of selected dishes in each category tab.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Display total selected dishes count at the bottom.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Include a "Continue" button (no navigation after clicking).
 
-### Code Splitting
+6. Ingredient Detail Screen
+Clicking "Ingredient" navigates to a new screen.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Shows dish name, short description, and ingredient details with quantities (mock data).
 
-### Analyzing the Bundle Size
+Use react-router-dom for navigating between main menu and ingredient detail screens.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Maintain state for selected dishes and filters across navigation.
