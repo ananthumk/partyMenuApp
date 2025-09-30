@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import Header from './Header.js'
 import DishesList from './DishesList.js'
 
 const Home = ({ totalDish, setTotalDish, vegCategory,mcCount,dCount, sidesCount, sCount, setdCount,setMcCount, setSidesCount, setsCount, setVeg, nonVegCategory, setNonVeg, category, setCategory}) => {
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('') // Store search query from search bar
   return (
     <div>
         <Header setSearchQuery={setSearchQuery} mcCount={mcCount} dCount={dCount} sidesCount={sidesCount} sCount={sCount} category={category} setCategory={setCategory} vegCategory={vegCategory} setVeg={setVeg} nonVegCategory={nonVegCategory} setNonVeg={setNonVeg} /> 

@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io";
 import { dishes } from '../data/mockDishes';
 import DishCard from './DishCard.js';
@@ -7,12 +7,13 @@ import Popup from './Popup.js'
 import '../App.css'
 
 const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount, setSidesCount, setsCount, vegCategory, nonVegCategory, category}) => {
-  const [dishData, setDishData] = useState(dishes)
-  const [vegSection, setVegSection] = useState('')
-  const [nonVegSection, setNonVeegSection] = useState('')
-  const [showPopup, setShowPopup] = useState(false)
-  const [popupData, setPopupData] = useState({})
-
+  const [dishData, setDishData] = useState(dishes) // store dishes data
+  const [vegSection, setVegSection] = useState('') // select veg category
+  const [nonVegSection, setNonVeegSection] = useState('') // select non-veg category
+  const [showPopup, setShowPopup] = useState(false) // to show popup 
+  const [popupDishId, setPopupDishId] = useState(null) // add popup dish id
+ 
+  // add and remove dish to cart
   const toggleDish = (id) => {
      setDishData(prev => 
       prev.map(dish => 
@@ -20,7 +21,8 @@ const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount
       )
      )
   }
-
+  
+  // increase count based on mealtype
   const handleCount = (value) => {
      if(value === 'SIDES') {
        setSidesCount(prevDetails => prevDetails + 1)
@@ -32,7 +34,8 @@ const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount
       setdCount(prevDetails => prevDetails + 1)
      }
   }
-
+  
+  // decrease count based on mealtype
   const handleRemoveCount = (value) => {
      if(value === 'SIDES') {
        setSidesCount(prevDetails => prevDetails - 1)
@@ -49,7 +52,8 @@ const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount
     setVegSection(vegCategory ? 'VEG': '')
     setNonVeegSection(nonVegCategory ? 'NON-VEG': '')
   }, [vegCategory, nonVegCategory])
-
+  
+  //Filter data based on search query, veg and non-veg category
   const filterData = dishData.filter(data => {
     if(!vegSection && !nonVegSection){
       if(searchQuery){
@@ -72,6 +76,9 @@ const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount
       (data.type === vegSection || data.type === nonVegSection) && data.mealType === category
     )
   })
+  
+  const currentPopupData = dishData.find(dish => dish.id === popupDishId ) // to get popup dish details
+
   return (
     <>
     <div className='dishes-list-container'>
@@ -80,11 +87,13 @@ const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount
          <IoIosArrowDown size={27} />
       </div>
       <div className='dish-card-conatiner'>
-         {filterData.map(dish => (
+         {!filterData.length ? <h2 style={{textAlign: 'center', marginTop: '20px'}}>No Dishes Found</h2> :
+         filterData.map(dish => (
             <div onClick={() => {
-              setPopupData(dish)
+              setPopupDishId(dish.id)
+              
             }}>
-            <DishCard setTotalDish={setTotalDish} handleRemoveCount={handleRemoveCount} 
+            <DishCard key={dish.id} setTotalDish={setTotalDish} handleRemoveCount={handleRemoveCount} 
             handleCount={handleCount} dish={dish} setShowPopup={setShowPopup} toggleDish={toggleDish} />
             </div>
          ))}
@@ -103,8 +112,12 @@ const DishesList = ({ searchQuery, totalDish, setTotalDish, setdCount,setMcCount
           </div>
       </div>
     </div>
-    {showPopup && <Popup setTotalDish={setTotalDish}  handleRemoveCount={handleRemoveCount} 
-            handleCount={handleCount} toggleDish={toggleDish} setShowPopup={setShowPopup} popupData={popupData} />}
+    {showPopup && <Popup setTotalDish={setTotalDish} 
+     handleRemoveCount={handleRemoveCount} 
+            handleCount={handleCount} 
+            toggleDish={toggleDish} 
+            setShowPopup={setShowPopup} 
+            popupData={currentPopupData} />}
     </>
   )
 }

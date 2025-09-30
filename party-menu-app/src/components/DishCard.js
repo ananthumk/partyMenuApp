@@ -1,4 +1,3 @@
-import React from 'react'
 import ingredientImg from '../assests/ingredient.png'
 import veg from '../assests/veg.png'
 import nonVeg from '../assests/nonVeg.png'
@@ -20,7 +19,7 @@ const DishCard = ({dish, setTotalDish, handleRemoveCount, handleCount, setShowPo
           </div>
        </div>
        <div className='card-image-section'>
-          <img src={dish.image} alt={dish.name} className='card-image' />
+          <img src={dish.category.image} alt={dish.name} className='card-image' />
           {!dish.added ? 
           <button onClick={() => {toggleDish(dish.id)
             handleCount(dish.mealType) 
